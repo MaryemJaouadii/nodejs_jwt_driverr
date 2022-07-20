@@ -1,13 +1,13 @@
 const bcryptjs = require("bcryptjs");
-const userService = require("../services/users.services");
+const driverService = require("../services/drivers.services");
 
 exports.register = (req, res, next) => {
-  const { password } = req.body;
+  const { username, phone, password, car_model, car_number } = req.body;
   const salt = bcryptjs.genSaltSync(10);
 
   req.body.password = bcryptjs.hashSync(password, salt);
 
-  userService.register(req.body, (error, result) => {
+  driverService.register(req.body, (error, result) => {
     if (error) {
       return next(error);
     }
@@ -22,7 +22,7 @@ exports.login = (req, res, next) => {
   const { phone, password } = req.body;
   console.log("phone: " + phone + "password: " + password);
 
-  userService.login({ phone, password }, (error, result) => {
+  driverService.login({ phone, password }, (error, result) => {
     if (error) {
       return next(error);
     }
@@ -33,6 +33,6 @@ exports.login = (req, res, next) => {
   });
 };
 
-exports.userProfile = (req, res, next) => {
-  return res.status(200).json({ message: "Authorozed User!" });
+exports.driverProfile = (req, res, next) => {
+  return res.status(200).json({ message: "Authorozed Driver!" });
 };

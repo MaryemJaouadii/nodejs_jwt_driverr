@@ -28,15 +28,15 @@ auth.authenticateToken.unless = unless;
 app.use(
   auth.authenticateToken.unless({
     path: [
-      { url: "/users/login", methods: ["POST"] },
-      { url: "/users/register", methods: ["POST"] },
+      { url: "/drivers/login", methods: ["POST"] },
+      { url: "/drivers/register", methods: ["POST"] },
     ],
   })
 );
 
 app.use(express.json());
 
-app.use("/users", require("./routes/users.routes"));
+app.use("/drivers", require("./routes/drivers.routes"));
 
 app.use(errors.errorHandler);
 

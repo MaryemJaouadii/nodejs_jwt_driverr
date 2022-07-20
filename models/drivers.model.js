@@ -2,16 +2,11 @@ const mongoose = require("mongoose");
 const { Schema } = mongoose;
 const uniqueValidator = require("mongoose-unique-validator");
 
-const userSchema = new Schema({
+const driverSchema = new Schema({
   username: {
     type: String,
     required: true,
   },
-  //  email: {
-  //     type: String,
-  //     required: true,
-  //     unique: true,
-  //   },
   phone: {
     type: String,
     required: true,
@@ -21,13 +16,22 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  car_model: {
+    type: String,
+    required: true,
+  },
+  car_number: {
+    type: String,
+    required: true,
+  },
+
   date: {
     type: Date,
     default: Date.now(),
   },
 });
 
-userSchema.set("toJSON", {
+driverSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -36,8 +40,8 @@ userSchema.set("toJSON", {
   },
 });
 
-userSchema.plugin(uniqueValidator, { message: "Phone already in use." });
+driverSchema.plugin(uniqueValidator, { message: "Phone already in use." });
 
-const User = mongoose.model("user", userSchema);
+const Driver = mongoose.model("driver", driverSchema);
 
-module.exports = User;
+module.exports = Driver;
