@@ -3,6 +3,7 @@ const driverService = require("../services/drivers.services");
 
 exports.register = (req, res, next) => {
   const { username, phone, password, car_model, car_number } = req.body;
+
   const salt = bcryptjs.genSaltSync(10);
 
   req.body.password = bcryptjs.hashSync(password, salt);
