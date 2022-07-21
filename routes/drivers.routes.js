@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.post("/register", driverController.register);
 router.post("/login", driverController.login);
-router.post("/driver-profile", driverController.driverProfile);
+router.get("/driver-profile", driverController.driverProfile);
 
 module.exports = router;
